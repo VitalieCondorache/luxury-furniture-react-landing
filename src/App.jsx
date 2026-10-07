@@ -2,6 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { LANGUAGE_OPTIONS, PREFERRED_LANG_KEY, translations } from './content'
 
+// Swap these for your own details before deploying the site.
+const CONTACT = {
+  phone: '+40 700 000 000',
+  email: 'contact@example.com',
+}
+
 const getInitialLanguage = () => {
   if (typeof window === 'undefined') return 'ro'
 
@@ -189,7 +195,7 @@ function App() {
                 <i className="fa-solid fa-phone"></i>
                 <div>
                   <h4>{content.phoneTitle}</h4>
-                  <p>+40 712 345 678</p>
+                  <p>{CONTACT.phone}</p>
                 </div>
               </div>
 
@@ -197,7 +203,7 @@ function App() {
                 <i className="fa-solid fa-envelope"></i>
                 <div>
                   <h4>{content.emailTitle}</h4>
-                  <a href="mailto:vitalie.condor@gmail.com">vitalie.condor@gmail.com</a>
+                  <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
                 </div>
               </div>
 
@@ -212,13 +218,12 @@ function App() {
 
             <form
               className="contact-form"
-              action="https://formsubmit.co/vitalie.condor@gmail.com"
+              action={`https://formsubmit.co/${CONTACT.email}`}
               method="POST"
             >
               <input type="hidden" name="_subject" value={`New message from the ${content.brandName} website`} />
               <input type="hidden" name="_captcha" value="false" />
               <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_next" value="https://yourdomain.com/thank-you.html" />
 
               <div className="field-group">
                 <input type="text" name="nume" placeholder={content.formName} required />
